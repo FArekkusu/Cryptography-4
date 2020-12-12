@@ -33,7 +33,7 @@ The generated password hashes can be found [here](https://github.com/FArekkusu/C
 
 ## Password cracking
 
-### Recovered passwords
+### Recovering passwords
 
 Password hashes were taken from [here](https://github.com/vladlytvynenko/crypto-labs/tree/master/lab4).
 
@@ -43,12 +43,6 @@ Total passwords - 200,000
 Cracked with dictionary attack - 153,116 in 7.39 seconds
 Cracked with bruteforce attack - 93,216 in 30 minutes (6 hours and 18 minutes estimated to crack the rest)
 
-#### SHA-1 + salt
-
-Total passwords - 200,000
-Cracked with dictionary attack - 203 in 18 minutes
-Cracked with bruteforce attack - 2 in 20 minutes (bruteforce attack is infeasible)
-
 #### bcrypt
 
 Total passwords - 200,000
@@ -57,8 +51,14 @@ Cracked with bruteforce attack - 0 in 30 minutes (bruteforce attack is infeasibl
 
 #### Summary
 
-MD5 is notoriously bad, and unsuprisingly it turned out to be very easy to crack - ~75% of the passwords were found with a dictionary attack, and it is possible to find all the preimages in only a few hours.
+MD5 is notoriously bad, and unsuprisingly it turned out to be very easy to crack - ~75% of the passwords were found with a dictionary attack in mere seconds, and it is possible to find all the preimages in only a few hours.
 
-SHA-1.
+SHA-1 with salt - untested due to hashcat refusing to work. In theory, it is still easy to crack with a dictionary attack, although it will be considerably slower than cracking plain MD5 as every password-salt pair has to be checked for existence among the hashes. Bruteforce becomes impractical as checking every possible combination of symbols instead of picking passwords from a known list will take very long time.
 
-Bcrypt is known as a secure algorithm which takes long time to hash a password. For this reason even though a dictionary attack is possible, it'll still take a very long time to crack a list of known passwords. At the same time, bruteforce attack is out of question, as checking every possible combination of letters will take years even for relatively short passwords.
+Bcrypt is known as a secure algorithm which takes long time to hash a password. For this reason even though a dictionary attack is possible, it'll be very slow. At the same time, bruteforce attack is out of question, as checking every possible combination of letters will take years even for relatively short passwords.
+
+From the results it is clear that the dictionary attack is very effective as it allows to recover huge amounts of passwords very quickly even for secure algorithms like bcrypt or argon2 (not tested here). The only downside of it is the fact that it is not possible to crack every single password as anything that is not present in the dictionary will be skipped. Bruteforce attack has no problems with this as it exhausts the list of all possible strings that could be used as passwords, but for this reason such approach is very time-consuming.
+
+### Recommendations
+
+When working on real life applications one should use secure attack-resistant hashing algorithms with high execution time and/or memory consumption such as bcrypt, or preferably argon2 as with the modern hardware hashing functions which can be computed in a fraction practically provide zero protection. The second issue, which is even more important, is the quality of passwords itself - the passwords should be long (12 or better 16 characters as a minimum) and unpredictable (no patterns, without padding the password with the same character to fulfill the minimum length requirement, without putting all the digits and special characters at the end of the password etc.), as a simple dictionary attack yields results almost immediately after it is launched.
