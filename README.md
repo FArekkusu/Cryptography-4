@@ -39,14 +39,14 @@ Password hashes were taken from [here](https://github.com/vladlytvynenko/crypto-
 
 #### MD 5
 
-Total passwords - 200,000
-Cracked with dictionary attack - 153,116 in 7.39 seconds
+Total passwords - 200,000  
+Cracked with dictionary attack - 153,116 in 7.39 seconds  
 Cracked with bruteforce attack - 93,216 in 30 minutes (6 hours and 18 minutes estimated to crack the rest)
 
 #### bcrypt
 
-Total passwords - 200,000
-Cracked with dictionary attack - 1,122 in 23 minutes (4 years estimated to crack the rest)
+Total passwords - 200,000  
+Cracked with dictionary attack - 1,122 in 23 minutes (4 years estimated to crack the rest)  
 Cracked with bruteforce attack - 0 in 30 minutes (bruteforce attack is infeasible)
 
 #### Summary
