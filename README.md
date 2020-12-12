@@ -30,3 +30,35 @@ For password hashing the following 3 algorithms are used:
 * [bcrypt](https://en.wikipedia.org/wiki/Bcrypt) (using the [bcrypt](https://github.com/pyca/bcrypt/) library)
 
 The generated password hashes can be found [here](https://github.com/FArekkusu/Cryptography-4/tree/main/generated_hashes).
+
+## Password cracking
+
+### Recovered passwords
+
+Password hashes were taken from [here](https://github.com/vladlytvynenko/crypto-labs/tree/master/lab4).
+
+#### MD 5
+
+Total passwords - 200,000
+Cracked with dictionary attack - 153,116 in 7.39 seconds
+Cracked with bruteforce attack - 93,216 in 30 minutes (6 hours and 18 minutes estimated to crack the rest)
+
+#### SHA-1 + salt
+
+Total passwords - 200,000
+Cracked with dictionary attack - 203 in 18 minutes
+Cracked with bruteforce attack - 2 in 20 minutes (bruteforce attack is infeasible)
+
+#### bcrypt
+
+Total passwords - 200,000
+Cracked with dictionary attack - 1,122 in 23 minutes (4 years estimated to crack the rest)
+Cracked with bruteforce attack - 0 in 30 minutes (bruteforce attack is infeasible)
+
+#### Summary
+
+MD5 is notoriously bad, and unsuprisingly it turned out to be very easy to crack - ~75% of the passwords were found with a dictionary attack, and it is possible to find all the preimages in only a few hours.
+
+SHA-1.
+
+Bcrypt is known as a secure algorithm which takes long time to hash a password. For this reason even though a dictionary attack is possible, it'll still take a very long time to crack a list of known passwords. At the same time, bruteforce attack is out of question, as checking every possible combination of letters will take years even for relatively short passwords.
